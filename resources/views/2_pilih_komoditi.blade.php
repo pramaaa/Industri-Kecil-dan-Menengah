@@ -19,4 +19,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-primary mx-auto d-block" type="submit" value=
+                    <input class="btn btn-primary mx-auto d-block" type="submit" value="Hitung">
+                </div>
+            </form>
+        </div>
+    </div>
+
+@endsection
