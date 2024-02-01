@@ -9,7 +9,7 @@
             <a href="/industri/export_excel" class="btn btn-success my-3" target="_blank"><i class="fa fa-download"> Unduh
                     Format Excel</i></a> &nbsp;
             <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#importExcel">
-                <i class="fa fa-upload"> Import File Excel</i></button>&nbsp;&nbsp;
+                <i class="fa fa-upload"> Import File Excel </i></button>&nbsp;&nbsp;
             <a href="#" class="btn btn-danger my-3 deleteall" target=""><i class="fa fa-trash"> Hapus Seluruh
                     Data</i></a>
             <a href="/listdata" class="btn btn-link"><i class="fa fa-refresh fa-spin"></i> Refresh</a>

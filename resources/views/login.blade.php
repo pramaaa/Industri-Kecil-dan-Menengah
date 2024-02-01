@@ -21,7 +21,7 @@
 @endif
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>SPK</b>-IKM</a>
+    <a href="#"><b>SPK</b>-IKM </a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
