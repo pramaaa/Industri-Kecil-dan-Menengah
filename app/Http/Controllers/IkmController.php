@@ -14,41 +14,40 @@ use Illuminate\Support\Facades\Validator;
 
 class IkmController extends Controller
 {
-    
+
     public function index()
     {
         //$industri = DB::table('industri')->get();                             // Cara QueryBuilder -> menggunakan "DB"
         //$industri = Industri::all();                                          // Cara Eloquent     -> menggunakan "Model"
         //$industri = DB::table('industri')->paginate(10);
-        
+
         $k="x";
-        $komoditi = Komoditi::all();  
+        $komoditi = Komoditi::all();
         $industri = Industri::with('komoditi')->paginate(10);                   // Select * industri join komoditi
-                                                                                // Paginate(10) = 10 Data perhalaman
+                                                         // Paginate(10) = 10 Data perhalaman
         //return view('listdata',['industri' => $industri]);
-        return view('listdata',compact('industri','komoditi','k'));                             
+        return view('listdata',compact('industri','komoditi','k'));
     }
 
     public function cari(Request $request)
     {
         $nama = $request->nama;
-        
+
         $k="x";
-        $komoditi = Komoditi::all();  
+        $komoditi = Komoditi::all();
         $industri = Industri::with('komoditi')                                  // Select * Industri join Komoditi
         ->where('nama_industri','like',"%".$nama."%")                           // where
         ->orwhere('nama_pemilik','like',"%".$nama."%")
         ->paginate(10);
 
-
-        return view('listdata',compact('industri','komoditi','komoditi_id','k'));                        
-    }  
+        return view('listdata',compact('industri','komoditi','komoditi_id','k'));
+    }
 
     public function selectkomoditi(Request $request)
     {
         $komoditi_id = $request->komoditi_id;
-        
-        $komoditi = Komoditi::all();  
+
+        $komoditi = Komoditi::all();
         $industri = Industri::with('komoditi')                                  // Select * Industri join Komoditi
         ->where('komoditi_id',$komoditi_id)                           // where
         ->paginate(10);
@@ -56,8 +55,8 @@ class IkmController extends Controller
         $k=$komoditi_id;
         if($komoditi_id == "")
             $k="x";
-        return view('listdata',compact('industri','komoditi','komoditi_id','k'));                        
-    }   
+        return view('listdata',compact('industri','komoditi','komoditi_id','k'));
+    }
 
 
     public function inputform()
@@ -65,7 +64,7 @@ class IkmController extends Controller
         $komoditi = Komoditi::all();                                            // Select * Komoditi
         $edit=false;
         return view('form',compact('komoditi','edit'));
- 
+
     }
 
     // method untuk insert data ke table industri
@@ -90,11 +89,11 @@ class IkmController extends Controller
     // method untuk memanggil view edit data industri
     public function editform($id)
     {
-        $komoditi = Komoditi::all();                                               
+        $komoditi = Komoditi::all();
         $i = Industri::find($id);                                               // Select id Industri where $id
         $edit=true;
         return view('form',compact('i','komoditi','edit'));
- 
+
     }
 
     // update data industri
@@ -118,12 +117,12 @@ class IkmController extends Controller
     // method untuk hapus data industri
     public function hapus($id)
     {
-        $industri = Industri::find($id);                                        // Select id Industri where $id   
+        $industri = Industri::find($id);                                        // Select id Industri where $id
         $nama = $industri->nama_industri;
         $industri->delete();                                                    // Delete from Industri
 
         return redirect('/listdata')->with('success', 'Berhasil menghapus IKM '.$nama.'');
-    }    
+    }
 
     public function format()
     {
@@ -145,23 +144,23 @@ class IkmController extends Controller
         ]);
 
         if ($cekjenisfile->fails()) {
- 
+
             return redirect('/listdata')->with('error', 'Gagal menambahkan  melalui fitur import, pastikan file sesuai format');
         }
         else{
 
             // menangkap file excel
             $file = $request->file('file');                                         // Query Upload
- 
+
             // membuat nama file unik
             $nama_file = rand().$file->getClientOriginalName();
- 
+
             // upload ke folder data_industri di dalam folder public
             $file->move('data_industri',$nama_file);
- 
+
             // import data
             Excel::import(new IndustriImport, public_path('/data_industri/'.$nama_file));   // Query Import
-            
+
             // alihkan halaman kembali
             return redirect('/listdata')->with('success', 'Berhasil menambahkan  melalui fitur import');
         }

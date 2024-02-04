@@ -15,7 +15,7 @@ class WaspasController extends Controller
     public function index()
     {  
         $komoditi = Komoditi::all();         
-        return view('2_pilih_komoditi',compact('komoditi','CR'));                             
+        return view('2_pilih_komoditi',compact('komoditi'));                             
     }
 
     // public function index2()

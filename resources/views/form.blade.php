@@ -9,7 +9,7 @@
             <div class="col-lg-6">
                 <div class="card mt-5">
                     <div class="card-body">
-                   
+
                         {{-- menampilkan error validasi --}}
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -24,7 +24,7 @@
                         <!-- form validasi -->
                         <form name="formulir" action="/tambahkan" method="post" onsubmit="return validasiForm()">
                             {{ csrf_field() }}
- 
+
                             <div class="form-group">
                                 <label for="nama_industri">Nama Industri</label>
                                 <input class="form-control" type="text" name="nama_industri" maxlength="50" value="{{ old('nama_industri') }}">
@@ -87,7 +87,7 @@
             <div class="col-lg-6">
                 <div class="card mt-5">
                     <div class="card-body">
- 
+
                         {{-- menampilkan error validasi --}}
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -98,7 +98,7 @@
                                 </ul>
                             </div>
                         @endif
-                  
+
                         <!-- form validasi -->
                         <form name="formulir" action="/industri/update/" method="post" onsubmit="return validasiForm()">
                             {{ csrf_field() }}
